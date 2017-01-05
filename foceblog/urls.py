@@ -15,7 +15,7 @@ Including another URLconf
 """
 from django.conf.urls import url
 from django.contrib import admin
-from blog.views import get_blogs,get_detail,test
+from blog.views import get_blogs,get_detail,blog_search
 from django.conf import settings
 from django.conf.urls.static import static
 
@@ -23,5 +23,5 @@ urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^$', get_blogs,name='get_blogs'),
     url(r'^detail/(\d+)/$', get_detail, name='blog_get_detail'),
-    url(r'^test/', test),
+    url(r'^search/', blog_search, name='blog_search'),
 ] + static(settings.STATIC_URL, document_root = settings.STATIC_ROOT)

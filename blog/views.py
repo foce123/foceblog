@@ -1,15 +1,16 @@
-from django.shortcuts import render
-from .models import Blog,Comment
+from django.shortcuts import render,render_to_response
+from django.template import RequestContext
+from blog.models import Blog, Comment, Author, Category, Tag
 from django.http import Http404
-from .forms import CommentForm
+from blog.forms import CommentForm
 
 # Create your views here.
 
 def get_blogs(request):
-	ctx = {
-		'blogs': Blog.objects.all().order_by('-created')
+	blog_s = {
+		'blog_s': Blog.objects.all().order_by('-created')
 	}
-	return render(request, 'blog.html', ctx)
+	return render(request, 'blog.html', blog_s)
 
 def get_detail(request,blog_id):
 	try:
@@ -33,5 +34,13 @@ def get_detail(request,blog_id):
 	}
 	return render(request, 'blog-detail.html', detail)
 
-def test(request):
-	return render(request,'blog-base.html')
+def blog_search(request):
+        tags = Tag.objects.all()
+        if 'search' in request.GET:
+                search = request.GET['search']
+                blogse = Blog.objects.filter(title__icontains=search).order_by('-created')
+                categories = Category.objects.all()
+                return render_to_response('blog-search.html',{"blog_s":blogse,"tags":tags,"categories":categories})
+	else:
+		blogse = Blog.objects.order_by('-id')
+		return render_to_response("blog.html",{"blog_s":blogse, "tags":tags})

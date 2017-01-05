@@ -1,0 +1,24 @@
+{% extends "blog-base.html" %}
+
+{% block article %}
+<article class="content-main">
+    {% for blog in blog_s %}
+        <h3><a href="{% url 'blog_get_detail' blog.id %}">{{ blog.title }}</a></h3>
+        <div class="row-fluid">
+            <div class="title">
+                <p class="muted">
+                    <i class="icon-time"></i><small>{{ blog.created|date:"Y-m-d H:i"  }} </small>
+                </p>
+            </div>
+            <div class="blog-search">
+                <a href="{% url 'blog_get_detail' blog.id %}#cmt" title="comment"><i class=" icon-comment"></i></a>
+            </div>
+        </div>
+        <hr>
+    {% empty %}
+        <p class="text-info">no result!!</p>
+    {% endfor %}
+
+</article>
+
+{% endblock %}
