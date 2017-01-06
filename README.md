@@ -11,6 +11,4 @@ pip install django
 django-admin --version  查看一下版本
 
 
-pip install django-tinymce 安装了一个富文本编辑器
-
 目前就这么多啦

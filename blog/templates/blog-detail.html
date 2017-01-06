@@ -2,6 +2,7 @@
 
 {% block article %}
     {% block article_title %}
+    {% autoescape off %}
     <div class="row">
         <div class="col-sm-8 blog-main">
             <div class="blog-post">
@@ -56,5 +57,6 @@
             </div>
         </div>
     </div>
+    {% endautoescape %}
     {% endblock %}
 {% endblock %}
